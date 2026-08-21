@@ -125,10 +125,6 @@ export const AccessLockModal: React.FC = () => {
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
-
-        <p className="text-[11px] text-center text-slate-400 dark:text-slate-500">
-          Environment Variable: <code className="text-emerald-500">NEXT_PUBLIC_ACCESS_PASSCODE</code>
-        </p>
       </div>
     </div>
   );
