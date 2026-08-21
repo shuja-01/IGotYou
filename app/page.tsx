@@ -12,6 +12,7 @@ import {
   fetchAllProducts,
   SEED_PRODUCTS,
   searchOpenFoodFactsAPI,
+  searchFreeDishAPI,
   SUPPORTED_COUNTRIES,
   CountryOption,
   getCountrySeedProducts,
@@ -93,12 +94,15 @@ export default function Home() {
 
     const timer = setTimeout(async () => {
       setIsSearchingAPI(true);
-      const results = await searchOpenFoodFactsAPI(
-        searchQuery,
-        selectedCountry.tag,
-        selectedCountry.code
-      );
-      setApiProducts(results);
+      const [offResults, dishResults] = await Promise.all([
+        searchOpenFoodFactsAPI(
+          searchQuery,
+          selectedCountry.tag,
+          selectedCountry.code
+        ),
+        searchFreeDishAPI(searchQuery),
+      ]);
+      setApiProducts([...dishResults, ...offResults]);
       setIsSearchingAPI(false);
     }, 350);
 

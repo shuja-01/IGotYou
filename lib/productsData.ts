@@ -93,6 +93,105 @@ export async function fetchAllProducts(): Promise<Product[]> {
   return getCountrySeedProducts('IN');
 }
 
+/**
+ * Free Live Dish & Recipe Nutrition Fetcher via USDA FoodData Central API
+ */
+export async function searchFreeDishAPI(query: string): Promise<Product[]> {
+  if (!query || query.trim().length < 2) return [];
+
+  try {
+    const url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY&query=${encodeURIComponent(
+      query.trim()
+    )}&pageSize=10`;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) return [];
+
+    const data = await response.json();
+    if (!data || !data.foods || !Array.isArray(data.foods)) return [];
+
+    return data.foods.map((item: any, idx: number): Product => {
+      const nutrientsList = item.foodNutrients || [];
+
+      const getNutrientVal = (namePattern: RegExp): number => {
+        const found = nutrientsList.find((n: any) =>
+          namePattern.test(n.nutrientName || n.name || '')
+        );
+        return found ? Number(found.value || found.amount || 0) : 0;
+      };
+
+      const calories = Math.round(getNutrientVal(/Energy/i) || 180);
+      const sugar = Number(getNutrientVal(/Sugars/i).toFixed(1));
+      const sodium = Math.round(getNutrientVal(/Sodium/i));
+      const satFat = Number(getNutrientVal(/saturated/i).toFixed(1));
+      const transFat = Number(getNutrientVal(/trans/i).toFixed(1));
+      const cholesterol = Math.round(getNutrientVal(/Cholesterol/i));
+
+      const nameLower = (item.description || '').toLowerCase();
+      const ingredientsLower = (item.ingredients || '').toLowerCase();
+      const fullText = `${nameLower} ${ingredientsLower}`;
+
+      const containsLactose =
+        fullText.includes('milk') ||
+        fullText.includes('butter') ||
+        fullText.includes('cheese') ||
+        fullText.includes('cream') ||
+        fullText.includes('whey') ||
+        fullText.includes('paneer');
+
+      const containsGluten =
+        fullText.includes('wheat') ||
+        fullText.includes('flour') ||
+        fullText.includes('naan') ||
+        fullText.includes('bhature') ||
+        fullText.includes('samosa') ||
+        fullText.includes('noodle') ||
+        fullText.includes('bread') ||
+        fullText.includes('roti') ||
+        fullText.includes('pasta');
+
+      const harmfulTags: string[] = [];
+      if (sugar > 10) harmfulTags.push('high_sugar');
+      if (sodium > 400) harmfulTags.push('high_sodium');
+      if (satFat > 5) harmfulTags.push('high_saturated_fat');
+      if (containsLactose) harmfulTags.push('lactose');
+      if (containsGluten) harmfulTags.push('gluten');
+
+      return {
+        id: `usda-dish-${item.fdcId || idx}-${Date.now()}`,
+        name: item.description || 'Cooked Traditional Dish',
+        brand: item.brandOwner || item.brandName || 'Cooked Dish / Recipe',
+        category: 'Dishes',
+        image_url: getFallbackProductImage('Dishes'),
+        serving_size: item.servingSize ? `${item.servingSize}${item.servingSizeUnit || 'g'}` : '100g',
+        nutrition_per_100g: {
+          calories,
+          sugar_g: sugar,
+          sodium_mg: sodium,
+          saturated_fat_g: satFat,
+          trans_fat_g: transFat,
+          cholesterol_mg: cholesterol,
+          contains_lactose: containsLactose,
+          contains_gluten: containsGluten,
+          purine_level: 'medium',
+        },
+        harmful_tags: harmfulTags,
+        description:
+          item.ingredients ||
+          `${item.description} fetched live from free USDA Food & Nutrition Database.`,
+      };
+    });
+  } catch (e) {
+    console.warn('USDA Dish API fetch error:', e);
+    return [];
+  }
+}
+
 function parseOpenFoodFactsItems(rawItems: any[]): Product[] {
   return rawItems.map((item: any, idx: number): Product => {
     const nutriments = item.nutriments || {};
@@ -133,7 +232,9 @@ function parseOpenFoodFactsItems(rawItems: any[]): Product[] {
 
     let category: Product['category'] = 'Snacks';
     const categoriesText = (item.categories || '').toLowerCase();
-    if (categoriesText.includes('beverage') || categoriesText.includes('drink') || categoriesText.includes('juice')) {
+    if (categoriesText.includes('meal') || categoriesText.includes('dish') || categoriesText.includes('curry') || categoriesText.includes('rice')) {
+      category = 'Dishes';
+    } else if (categoriesText.includes('beverage') || categoriesText.includes('drink') || categoriesText.includes('juice')) {
       category = 'Soft Drinks';
     } else if (categoriesText.includes('biscuit') || categoriesText.includes('cookie')) {
       category = 'Biscuits';

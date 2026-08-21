@@ -41,7 +41,7 @@ export interface Product {
   id: string;
   name: string;
   brand: string;
-  category: 'Snacks' | 'Biscuits' | 'Dairy' | 'Soft Drinks' | 'Instant Foods' | 'Chocolates';
+  category: 'Dishes' | 'Snacks' | 'Biscuits' | 'Dairy' | 'Soft Drinks' | 'Instant Foods' | 'Chocolates';
   image_url: string;
   serving_size?: string;
   nutrition_per_100g: NutritionPer100g;
