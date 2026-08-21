@@ -15,7 +15,7 @@ interface SearchAndFilterProps {
   placeholder?: string;
 }
 
-const CATEGORIES = ['All', 'Snacks', 'Biscuits', 'Dairy', 'Soft Drinks', 'Instant Foods', 'Chocolates'];
+const CATEGORIES = ['All', 'Dishes', 'Snacks', 'Biscuits', 'Dairy', 'Soft Drinks', 'Instant Foods', 'Chocolates'];
 
 export const SearchAndFilter: React.FC<SearchAndFilterProps> = ({
   searchQuery,

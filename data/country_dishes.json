@@ -1,0 +1,451 @@
+{
+  "IN": [
+    {
+      "id": "dish-in-1",
+      "name": "Chole Bhature",
+      "brand": "Traditional Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "250g",
+      "nutrition_per_100g": {
+        "calories": 290,
+        "sugar_g": 3.5,
+        "sodium_mg": 680,
+        "saturated_fat_g": 6.5,
+        "trans_fat_g": 0.2,
+        "cholesterol_mg": 12,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "gluten"],
+      "description": "Spicy chickpea curry served with deep-fried fluffy maida bread."
+    },
+    {
+      "id": "dish-in-2",
+      "name": "Potato Samosa (2 pcs)",
+      "brand": "Traditional Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "150g",
+      "nutrition_per_100g": {
+        "calories": 262,
+        "sugar_g": 2.1,
+        "sodium_mg": 540,
+        "saturated_fat_g": 5.8,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "gluten"],
+      "description": "Crispy fried pastry stuffed with spiced potato and green peas filling."
+    },
+    {
+      "id": "dish-in-3",
+      "name": "Butter Chicken & Butter Naan",
+      "brand": "Traditional Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "300g",
+      "nutrition_per_100g": {
+        "calories": 240,
+        "sugar_g": 4.8,
+        "sodium_mg": 620,
+        "saturated_fat_g": 8.5,
+        "trans_fat_g": 0.3,
+        "cholesterol_mg": 45,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "lactose", "gluten"],
+      "description": "Tender chicken cooked in rich tomato butter gravy served with soft naan bread."
+    },
+    {
+      "id": "dish-in-4",
+      "name": "Masala Dosa with Sambar",
+      "brand": "Traditional Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "220g",
+      "nutrition_per_100g": {
+        "calories": 165,
+        "sugar_g": 2.0,
+        "sodium_mg": 380,
+        "saturated_fat_g": 2.2,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": [],
+      "description": "Crispy fermented rice and lentil crepe filled with spiced potato masala."
+    },
+    {
+      "id": "dish-in-5",
+      "name": "Idli Sambar & Coconut Chutney",
+      "brand": "Traditional Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "200g",
+      "nutrition_per_100g": {
+        "calories": 130,
+        "sugar_g": 1.5,
+        "sodium_mg": 310,
+        "saturated_fat_g": 1.8,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": [],
+      "description": "Soft steamed rice and black gram cakes served with hot vegetable lentil sambar."
+    },
+    {
+      "id": "dish-in-6",
+      "name": "Pav Bhaji",
+      "brand": "Traditional Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "250g",
+      "nutrition_per_100g": {
+        "calories": 210,
+        "sugar_g": 4.0,
+        "sodium_mg": 710,
+        "saturated_fat_g": 7.2,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 18,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "lactose", "gluten"],
+      "description": "Spicy mashed mixed vegetable curry topped with butter and served with soft bread rolls."
+    }
+  ],
+  "MY": [
+    {
+      "id": "dish-my-1",
+      "name": "Nasi Lemak Special",
+      "brand": "Traditional Malaysian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "300g",
+      "nutrition_per_100g": {
+        "calories": 215,
+        "sugar_g": 3.8,
+        "sodium_mg": 580,
+        "saturated_fat_g": 6.2,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 35,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat"],
+      "description": "Fragrant rice cooked in coconut milk & pandan leaves served with sambal, fried anchovies, peanuts, and egg."
+    },
+    {
+      "id": "dish-my-2",
+      "name": "Roti Canai with Dhal Curry",
+      "brand": "Traditional Malaysian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "180g",
+      "nutrition_per_100g": {
+        "calories": 310,
+        "sugar_g": 1.8,
+        "sodium_mg": 490,
+        "saturated_fat_g": 7.5,
+        "trans_fat_g": 0.2,
+        "cholesterol_mg": 10,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "lactose", "gluten"],
+      "description": "Flaky, buttery Indian-influenced flatbread served with savory lentil dhal gravy."
+    },
+    {
+      "id": "dish-my-3",
+      "name": "Penang Laksa Noodle Soup",
+      "brand": "Traditional Malaysian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "350g",
+      "nutrition_per_100g": {
+        "calories": 145,
+        "sugar_g": 3.0,
+        "sodium_mg": 690,
+        "saturated_fat_g": 4.8,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 22,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "high"
+      },
+      "harmful_tags": ["high_sodium", "gluten"],
+      "description": "Spicy sour fish-based tamarind noodle soup topped with shredded mackerel, pineapple, and mint."
+    },
+    {
+      "id": "dish-my-4",
+      "name": "Char Kway Teow",
+      "brand": "Traditional Malaysian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "250g",
+      "nutrition_per_100g": {
+        "calories": 230,
+        "sugar_g": 2.5,
+        "sodium_mg": 740,
+        "saturated_fat_g": 6.8,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 55,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "high"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat"],
+      "description": "Stir-fried flat rice noodles cooked over intense wok heat with prawns, cockles, egg, and bean sprouts."
+    },
+    {
+      "id": "dish-my-5",
+      "name": "Beef Rendang",
+      "brand": "Traditional Malaysian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "200g",
+      "nutrition_per_100g": {
+        "calories": 210,
+        "sugar_g": 3.2,
+        "sodium_mg": 520,
+        "saturated_fat_g": 7.8,
+        "trans_fat_g": 0.2,
+        "cholesterol_mg": 60,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat"],
+      "description": "Tender beef slow-cooked in coconut milk and rich ground spices until caramelized."
+    },
+    {
+      "id": "dish-my-6",
+      "name": "Chicken Satay with Peanut Sauce",
+      "brand": "Traditional Malaysian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "150g",
+      "nutrition_per_100g": {
+        "calories": 225,
+        "sugar_g": 11.5,
+        "sodium_mg": 460,
+        "saturated_fat_g": 4.5,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 48,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sugar", "high_sodium"],
+      "description": "Grilled marinated chicken skewers served with rich aromatic peanut dipping sauce."
+    }
+  ],
+  "SG": [
+    {
+      "id": "dish-sg-1",
+      "name": "Hainanese Chicken Rice",
+      "brand": "Traditional Singapore Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "300g",
+      "nutrition_per_100g": {
+        "calories": 185,
+        "sugar_g": 0.8,
+        "sodium_mg": 440,
+        "saturated_fat_g": 3.8,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 42,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium"],
+      "description": "Succulent poached chicken served over fragrant rice cooked in chicken broth and ginger."
+    },
+    {
+      "id": "dish-sg-2",
+      "name": "Singapore Chili Crab with Mantou",
+      "brand": "Traditional Singapore Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "350g",
+      "nutrition_per_100g": {
+        "calories": 195,
+        "sugar_g": 12.0,
+        "sodium_mg": 780,
+        "saturated_fat_g": 4.2,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 75,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "high"
+      },
+      "harmful_tags": ["high_sugar", "high_sodium", "gluten"],
+      "description": "Mud crab stir-fried in a sweet, savory, and spicy chili tomato gravy served with fried mantou buns."
+    },
+    {
+      "id": "dish-sg-3",
+      "name": "Kaya Toast & Soft-Boiled Eggs",
+      "brand": "Traditional Singapore Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "150g",
+      "nutrition_per_100g": {
+        "calories": 280,
+        "sugar_g": 16.5,
+        "sodium_mg": 320,
+        "saturated_fat_g": 8.0,
+        "trans_fat_g": 0.2,
+        "cholesterol_mg": 180,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sugar", "high_saturated_fat", "lactose", "gluten"],
+      "description": "Toasted bread spread with coconut egg jam and cold butter slabs, accompanied by run-down soft boiled eggs."
+    },
+    {
+      "id": "dish-sg-4",
+      "name": "Bak Kut Teh (Pork Rib Soup)",
+      "brand": "Traditional Singapore Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "300g",
+      "nutrition_per_100g": {
+        "calories": 160,
+        "sugar_g": 0.5,
+        "sodium_mg": 680,
+        "saturated_fat_g": 5.2,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 50,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "high"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat"],
+      "description": "Meaty pork ribs simmered in a complex broth of garlic, white pepper, and Chinese herbs."
+    }
+  ],
+  "ID": [
+    {
+      "id": "dish-id-1",
+      "name": "Nasi Goreng Special",
+      "brand": "Traditional Indonesian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "280g",
+      "nutrition_per_100g": {
+        "calories": 198,
+        "sugar_g": 4.5,
+        "sodium_mg": 640,
+        "saturated_fat_g": 3.5,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 45,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium", "gluten"],
+      "description": "Indonesian fried rice seasoned with sweet soy sauce, garlic, shallots, topped with a fried egg and prawn crackers."
+    },
+    {
+      "id": "dish-id-2",
+      "name": "Sate Ayam (Chicken Satay with Peanut Sauce)",
+      "brand": "Traditional Indonesian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "160g",
+      "nutrition_per_100g": {
+        "calories": 235,
+        "sugar_g": 12.0,
+        "sodium_mg": 480,
+        "saturated_fat_g": 4.8,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 52,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sugar", "high_sodium"],
+      "description": "Grilled marinated chicken skewers smothered in rich homemade sweet peanut sauce."
+    },
+    {
+      "id": "dish-id-3",
+      "name": "Rendang Daging (Beef Rendang)",
+      "brand": "Traditional Indonesian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "200g",
+      "nutrition_per_100g": {
+        "calories": 220,
+        "sugar_g": 2.8,
+        "sodium_mg": 530,
+        "saturated_fat_g": 8.2,
+        "trans_fat_g": 0.2,
+        "cholesterol_mg": 65,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat"],
+      "description": "Minangkabau authentic beef slow-cooked in coconut milk and lemongrass spice paste."
+    },
+    {
+      "id": "dish-id-4",
+      "name": "Gado-Gado (Indonesian Veggie Salad)",
+      "brand": "Traditional Indonesian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "220g",
+      "nutrition_per_100g": {
+        "calories": 140,
+        "sugar_g": 5.2,
+        "sodium_mg": 340,
+        "saturated_fat_g": 2.1,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 18,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "medium"
+      },
+      "harmful_tags": [],
+      "description": "Slightly blanched vegetables, tofu, tempeh, and boiled egg dressed in creamy peanut sauce."
+    },
+    {
+      "id": "dish-id-5",
+      "name": "Bakso Sapi (Indonesian Beef Meatball Soup)",
+      "brand": "Traditional Indonesian Dish",
+      "category": "Dishes",
+      "image_url": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "300g",
+      "nutrition_per_100g": {
+        "calories": 155,
+        "sugar_g": 1.2,
+        "sodium_mg": 670,
+        "saturated_fat_g": 4.1,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 40,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium"],
+      "description": "Springy savory beef meatballs served in hot clear beef broth with glass noodles and fried shallots."
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 import { Product } from '@/types/health';
 import seedProductsRaw from '@/data/seed_products.json';
 import countryProductsRaw from '@/data/country_products.json';
+import countryDishesRaw from '@/data/country_dishes.json';
 import { supabase, isSupabaseConfigured } from './supabaseClient';
 
 export const SEED_PRODUCTS: Product[] = seedProductsRaw as Product[];
 export const COUNTRY_PRODUCTS: Record<string, Product[]> = countryProductsRaw as Record<string, Product[]>;
+export const COUNTRY_DISHES: Record<string, Product[]> = countryDishesRaw as Record<string, Product[]>;
 
 export interface CountryOption {
   code: string;
@@ -20,33 +22,34 @@ export const SUPPORTED_COUNTRIES: CountryOption[] = [
     name: 'India',
     flag: '🇮🇳',
     tag: 'india',
-    searchPlaceholder: 'Search by brand (e.g. Uncle Chipps, Parle-G, Amul, Maggi, Kurkure)...',
+    searchPlaceholder: 'Search items or dishes (e.g. Chole Bhature, Samosa, Uncle Chipps, Parle-G, Maggi)...',
   },
   {
     code: 'MY',
     name: 'Malaysia',
     flag: '🇲🇾',
     tag: 'malaysia',
-    searchPlaceholder: 'Search by brand (e.g. 100PLUS, Milo, Dutch Lady, Julie\'s, 7-Eleven, Mixue)...',
+    searchPlaceholder: 'Search items or dishes (e.g. Nasi Lemak, Roti Canai, Laksa, 100PLUS, Milo, Julie\'s)...',
   },
   {
     code: 'SG',
     name: 'Singapore',
     flag: '🇸🇬',
     tag: 'singapore',
-    searchPlaceholder: 'Search by brand (e.g. IRVINS, F&N, Pokka, Prima Taste, Tiger, Khong Guan)...',
+    searchPlaceholder: 'Search items or dishes (e.g. Chicken Rice, Chili Crab, Kaya Toast, IRVINS, F&N, Pokka)...',
   },
   {
     code: 'ID',
     name: 'Indonesia',
     flag: '🇮🇩',
     tag: 'indonesia',
-    searchPlaceholder: 'Search by brand (e.g. Indomie, Teh Botol, Beng-Beng, SilverQueen, Chitato)...',
+    searchPlaceholder: 'Search items or dishes (e.g. Nasi Goreng, Rendang, Satay, Indomie, Teh Botol, Kopiko)...',
   },
 ];
 
 // Category Fallback Images
 export const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
+  Dishes: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80',
   Snacks: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=600&q=80',
   Biscuits: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
   Dairy: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=600&q=80',
@@ -61,13 +64,17 @@ export function getFallbackProductImage(category: string): string {
 }
 
 export function getCountrySeedProducts(countryCode: string): Product[] {
-  if (countryCode === 'IN') return SEED_PRODUCTS;
-  return COUNTRY_PRODUCTS[countryCode] || SEED_PRODUCTS;
+  const dishes = COUNTRY_DISHES[countryCode] || COUNTRY_DISHES['IN'] || [];
+  if (countryCode === 'IN') {
+    return [...dishes, ...SEED_PRODUCTS];
+  }
+  const products = COUNTRY_PRODUCTS[countryCode] || [];
+  return [...dishes, ...products];
 }
 
 export async function fetchAllProducts(): Promise<Product[]> {
   if (!isSupabaseConfigured || !supabase) {
-    return SEED_PRODUCTS;
+    return getCountrySeedProducts('IN');
   }
   try {
     const fetchPromise = supabase.from('products').select('*');
@@ -77,12 +84,13 @@ export async function fetchAllProducts(): Promise<Product[]> {
 
     const res = (await Promise.race([fetchPromise, timeoutPromise])) as any;
     if (!res.error && res.data && res.data.length > 0) {
-      return res.data as Product[];
+      const dishes = COUNTRY_DISHES['IN'] || [];
+      return [...dishes, ...(res.data as Product[])];
     }
   } catch (err) {
     console.warn('Supabase fetch failed, using seed dataset:', err);
   }
-  return SEED_PRODUCTS;
+  return getCountrySeedProducts('IN');
 }
 
 function parseOpenFoodFactsItems(rawItems: any[]): Product[] {
