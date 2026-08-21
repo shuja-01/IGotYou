@@ -6,6 +6,7 @@ import { SearchAndFilter } from '@/components/SearchAndFilter';
 import { ProductCard } from '@/components/ProductCard';
 import { OnboardingModal } from '@/components/OnboardingModal';
 import { ProductDetailModal } from '@/components/ProductDetailModal';
+import { AccessLockModal } from '@/components/AccessLockModal';
 import { Product, EvaluationStatus } from '@/types/health';
 import {
   fetchAllProducts,
@@ -308,6 +309,7 @@ export default function Home() {
       </footer>
 
       {/* Interactive Modals */}
+      <AccessLockModal />
       <OnboardingModal />
       <ProductDetailModal
         product={selectedProduct}
