@@ -10,7 +10,7 @@ export const AccessLockModal: React.FC = () => {
   const [isUnlocked, setIsUnlocked] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Read environment variable set in Vercel
+  // Read environment variable
   const requiredPasscode =
     process.env.NEXT_PUBLIC_ACCESS_PASSCODE ||
     process.env.NEXT_PUBLIC_SITE_PASSWORD ||
@@ -19,7 +19,7 @@ export const AccessLockModal: React.FC = () => {
     '';
 
   useEffect(() => {
-    // If no environment passcode is set, keep site unlocked automatically
+    // If no environment passcode is configured, keep site unlocked automatically
     if (!requiredPasscode) {
       setIsUnlocked(true);
       return;
@@ -52,7 +52,7 @@ export const AccessLockModal: React.FC = () => {
       setIsUnlocked(true);
       setErrorMessage('');
     } else {
-      setErrorMessage('Incorrect passcode. Please check Vercel environment settings.');
+      setErrorMessage('Incorrect passcode. Please try again.');
     }
   };
 
@@ -60,7 +60,7 @@ export const AccessLockModal: React.FC = () => {
   if (isUnlocked) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950 backdrop-blur-xl animate-fadeIn">
       <div className="glass-panel max-w-md w-full p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl relative overflow-hidden space-y-6">
         {/* Glow background accent */}
         <div className="absolute -right-12 -top-12 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
