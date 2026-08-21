@@ -1,0 +1,512 @@
+{
+  "MY": [
+    {
+      "id": "my-1",
+      "name": "100PLUS Original Isotonic Drink",
+      "brand": "F&N 100PLUS",
+      "category": "Soft Drinks",
+      "image_url": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "250ml",
+      "nutrition_per_100g": {
+        "calories": 26,
+        "sugar_g": 6.0,
+        "sodium_mg": 480,
+        "saturated_fat_g": 0.0,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium"],
+      "description": "Malaysia's No. 1 carbonated isotonic electrolyte beverage designed for rehydration."
+    },
+    {
+      "id": "my-2",
+      "name": "Milo Ready-to-Drink Pack",
+      "brand": "Nestlé Malaysia",
+      "category": "Dairy",
+      "image_url": "https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "200ml",
+      "nutrition_per_100g": {
+        "calories": 71,
+        "sugar_g": 9.8,
+        "sodium_mg": 58,
+        "saturated_fat_g": 1.2,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 5,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["lactose", "gluten"],
+      "description": "Iconic Malaysian chocolate malt energy drink packed with Activ-Go nutrients."
+    },
+    {
+      "id": "my-3",
+      "name": "Dutch Lady Full Cream Milk UHT",
+      "brand": "Dutch Lady Malaysia",
+      "category": "Dairy",
+      "image_url": "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "250ml",
+      "nutrition_per_100g": {
+        "calories": 64,
+        "sugar_g": 4.8,
+        "sodium_mg": 45,
+        "saturated_fat_g": 2.4,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 14,
+        "contains_lactose": true,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["lactose"],
+      "description": "Pure UHT full cream milk produced locally in Malaysia rich in calcium."
+    },
+    {
+      "id": "my-4",
+      "name": "Julie's Peanut Butter Sandwich Biscuits",
+      "brand": "Julie's",
+      "category": "Biscuits",
+      "image_url": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "30g",
+      "nutrition_per_100g": {
+        "calories": 510,
+        "sugar_g": 22.0,
+        "sodium_mg": 450,
+        "saturated_fat_g": 12.0,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sugar", "high_sodium", "high_saturated_fat", "lactose", "gluten"],
+      "description": "Golden baked crispy crackers filled with rich savory peanut butter cream."
+    },
+    {
+      "id": "my-5",
+      "name": "Hup Seng Special Cream Crackers",
+      "brand": "Hup Seng",
+      "category": "Biscuits",
+      "image_url": "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "25g",
+      "nutrition_per_100g": {
+        "calories": 480,
+        "sugar_g": 2.0,
+        "sodium_mg": 520,
+        "saturated_fat_g": 8.5,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "gluten"],
+      "description": "Malaysia's famous square tin cream crackers baked to a flaky crispness."
+    },
+    {
+      "id": "my-6",
+      "name": "Mamee Monster Spicy Chicken Noodle Snack",
+      "brand": "Mamee",
+      "category": "Snacks",
+      "image_url": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "25g",
+      "nutrition_per_100g": {
+        "calories": 490,
+        "sugar_g": 3.0,
+        "sodium_mg": 890,
+        "saturated_fat_g": 10.5,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "gluten"],
+      "description": "Ready-to-eat crunchy noodle snack seasoned with savory spicy chicken powder."
+    },
+    {
+      "id": "my-7",
+      "name": "Gardenia Original Classic White Bread",
+      "brand": "Gardenia Malaysia",
+      "category": "Instant Foods",
+      "image_url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "50g",
+      "nutrition_per_100g": {
+        "calories": 260,
+        "sugar_g": 5.0,
+        "sodium_mg": 460,
+        "saturated_fat_g": 0.8,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium", "lactose", "gluten"],
+      "description": "Soft, freshly baked white loaf enriched with vitamins and minerals."
+    },
+    {
+      "id": "my-8",
+      "name": "Mixue Fresh Ice Cream & Boba Milk Tea",
+      "brand": "Mixue Malaysia",
+      "category": "Soft Drinks",
+      "image_url": "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "350ml",
+      "nutrition_per_100g": {
+        "calories": 110,
+        "sugar_g": 18.5,
+        "sodium_mg": 45,
+        "saturated_fat_g": 2.8,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 12,
+        "contains_lactose": true,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sugar", "lactose"],
+      "description": "Creamy soft-serve vanilla ice cream cone & brown sugar boba milk tea."
+    },
+    {
+      "id": "my-9",
+      "name": "7-Eleven Slurpee Frozen Beverage",
+      "brand": "7-Eleven Malaysia",
+      "category": "Soft Drinks",
+      "image_url": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "300ml",
+      "nutrition_per_100g": {
+        "calories": 55,
+        "sugar_g": 14.0,
+        "sodium_mg": 15,
+        "saturated_fat_g": 0.0,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sugar"],
+      "description": "Iconic 7-Eleven slushy frozen carbonated drink in fruity flavors."
+    },
+    {
+      "id": "my-10",
+      "name": "7-Eleven Japanese Rice Onigiri",
+      "brand": "7-Eleven Malaysia",
+      "category": "Instant Foods",
+      "image_url": "https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "110g",
+      "nutrition_per_100g": {
+        "calories": 185,
+        "sugar_g": 1.2,
+        "sodium_mg": 420,
+        "saturated_fat_g": 0.6,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 15,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium", "gluten"],
+      "description": "Fresh Japanese seaweed wrapped rice ball stuffed with tuna mayo or salmon."
+    },
+    {
+      "id": "my-11",
+      "name": "OldTown 3-in-1 White Coffee Classic",
+      "brand": "OldTown",
+      "category": "Soft Drinks",
+      "image_url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "38g",
+      "nutrition_per_100g": {
+        "calories": 440,
+        "sugar_g": 48.0,
+        "sodium_mg": 180,
+        "saturated_fat_g": 12.5,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 0,
+        "contains_lactose": true,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sugar", "high_saturated_fat", "lactose"],
+      "description": "Ipoh famous charcoal roasted instant white coffee blended with creamer."
+    },
+    {
+      "id": "my-12",
+      "name": "Super 3-in-1 Charcoal Roasted White Coffee",
+      "brand": "Super Coffee",
+      "category": "Soft Drinks",
+      "image_url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "36g",
+      "nutrition_per_100g": {
+        "calories": 435,
+        "sugar_g": 46.0,
+        "sodium_mg": 11.8,
+        "saturated_fat_g": 11.8,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": true,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sugar", "high_saturated_fat", "lactose"],
+      "description": "Aromatic roasted white coffee mix crafted with premium Arabica beans."
+    }
+  ],
+  "SG": [
+    {
+      "id": "sg-1",
+      "name": "IRVINS Salted Egg Potato Chips",
+      "brand": "IRVINS Singapore",
+      "category": "Snacks",
+      "image_url": "https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "30g",
+      "nutrition_per_100g": {
+        "calories": 580,
+        "sugar_g": 4.5,
+        "sodium_mg": 720,
+        "saturated_fat_g": 16.0,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 85,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "lactose", "gluten"],
+      "description": "Singapore's famous Dangerously Addictive salted egg yolk crispy potato chips with curry leaves."
+    },
+    {
+      "id": "sg-2",
+      "name": "F&N Seasons Ice Lemon Tea",
+      "brand": "F&N Singapore",
+      "category": "Soft Drinks",
+      "image_url": "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "250ml",
+      "nutrition_per_100g": {
+        "calories": 36,
+        "sugar_g": 8.8,
+        "sodium_mg": 18,
+        "saturated_fat_g": 0.0,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": [],
+      "description": "Refreshing black tea infused with natural lemon juice flavor."
+    },
+    {
+      "id": "sg-3",
+      "name": "Prima Taste Singapore Laksa La Mian",
+      "brand": "Prima Taste",
+      "category": "Instant Foods",
+      "image_url": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "185g",
+      "nutrition_per_100g": {
+        "calories": 370,
+        "sugar_g": 4.2,
+        "sodium_mg": 1150,
+        "saturated_fat_g": 12.8,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 10,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "medium"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "lactose", "gluten"],
+      "description": "Gourmet steamed air-dried noodles in authentic coconut laksa soup broth."
+    },
+    {
+      "id": "sg-4",
+      "name": "Pokka Japanese Green Tea (No Sugar)",
+      "brand": "Pokka Singapore",
+      "category": "Soft Drinks",
+      "image_url": "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "300ml",
+      "nutrition_per_100g": {
+        "calories": 0,
+        "sugar_g": 0.0,
+        "sodium_mg": 8,
+        "saturated_fat_g": 0.0,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": [],
+      "description": "100% real brewed Japanese green tea rich in natural antioxidants with 0 calories."
+    },
+    {
+      "id": "sg-5",
+      "name": "Khong Guan Cream Crackers",
+      "brand": "Khong Guan",
+      "category": "Biscuits",
+      "image_url": "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "25g",
+      "nutrition_per_100g": {
+        "calories": 475,
+        "sugar_g": 1.5,
+        "sodium_mg": 510,
+        "saturated_fat_g": 7.8,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "gluten"],
+      "description": "Heritage Singaporean crispy rectangular yeast-raised cream crackers."
+    },
+    {
+      "id": "sg-6",
+      "name": "Meiji Yan Yan Chocolate Dip Biscuits",
+      "brand": "Meiji Singapore",
+      "category": "Chocolates",
+      "image_url": "https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "50g",
+      "nutrition_per_100g": {
+        "calories": 512,
+        "sugar_g": 38.0,
+        "sodium_mg": 280,
+        "saturated_fat_g": 11.0,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 2,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sugar", "high_saturated_fat", "lactose", "gluten"],
+      "description": "Crunchy biscuit sticks served with smooth cocoa dipping cream cup."
+    }
+  ],
+  "ID": [
+    {
+      "id": "id-1",
+      "name": "Indomie Mi Goreng Fried Noodles",
+      "brand": "Indomie Indonesia",
+      "category": "Instant Foods",
+      "image_url": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "85g",
+      "nutrition_per_100g": {
+        "calories": 460,
+        "sugar_g": 7.5,
+        "sodium_mg": 960,
+        "saturated_fat_g": 8.0,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "gluten"],
+      "description": "Indonesia's legendary instant fried noodles served with sweet soy sauce and fried shallots."
+    },
+    {
+      "id": "id-2",
+      "name": "Teh Botol Sosro Jasmine Tea Drink",
+      "brand": "Sosro Indonesia",
+      "category": "Soft Drinks",
+      "image_url": "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "250ml",
+      "nutrition_per_100g": {
+        "calories": 38,
+        "sugar_g": 9.5,
+        "sodium_mg": 12,
+        "saturated_fat_g": 0.0,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": [],
+      "description": "Iconic Indonesian sweetened jasmine black tea beverage."
+    },
+    {
+      "id": "id-3",
+      "name": "Beng-Beng Chocolate Wafer Caramel Bar",
+      "brand": "Mayora Beng-Beng",
+      "category": "Chocolates",
+      "image_url": "https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "25g",
+      "nutrition_per_100g": {
+        "calories": 500,
+        "sugar_g": 42.0,
+        "sodium_mg": 180,
+        "saturated_fat_g": 13.5,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 5,
+        "contains_lactose": true,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sugar", "high_saturated_fat", "lactose", "gluten"],
+      "description": "4-in-1 combo wafer, caramel, crispy rice, and real milk chocolate coating."
+    },
+    {
+      "id": "id-4",
+      "name": "SilverQueen Milk Chocolate with Cashew",
+      "brand": "SilverQueen Indonesia",
+      "category": "Chocolates",
+      "image_url": "https://images.unsplash.com/photo-1548907040-4baa42d10919?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "30g",
+      "nutrition_per_100g": {
+        "calories": 540,
+        "sugar_g": 48.0,
+        "sodium_mg": 110,
+        "saturated_fat_g": 16.5,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 15,
+        "contains_lactose": true,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sugar", "high_saturated_fat", "lactose"],
+      "description": "Classic Indonesian milk chocolate bar studded with whole crunchy cashew nuts."
+    },
+    {
+      "id": "id-5",
+      "name": "Chitato Potato Chips Beef BBQ",
+      "brand": "Chitato Indonesia",
+      "category": "Snacks",
+      "image_url": "https://images.unsplash.com/photo-1528751014936-863e6e7a319c?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "35g",
+      "nutrition_per_100g": {
+        "calories": 530,
+        "sugar_g": 2.1,
+        "sodium_mg": 780,
+        "saturated_fat_g": 13.0,
+        "trans_fat_g": 0.1,
+        "cholesterol_mg": 0,
+        "contains_lactose": false,
+        "contains_gluten": true,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sodium", "high_saturated_fat", "gluten"],
+      "description": "Wavy cut potato chips seasoned with smoky Indonesian grilled beef barbecue flavor."
+    },
+    {
+      "id": "id-6",
+      "name": "Kopiko Coffee Candy Pocket Pack",
+      "brand": "Kopiko Indonesia",
+      "category": "Chocolates",
+      "image_url": "https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=600&q=80",
+      "serving_size": "20g",
+      "nutrition_per_100g": {
+        "calories": 435,
+        "sugar_g": 62.0,
+        "sodium_mg": 140,
+        "saturated_fat_g": 4.5,
+        "trans_fat_g": 0.0,
+        "cholesterol_mg": 0,
+        "contains_lactose": true,
+        "contains_gluten": false,
+        "purine_level": "low"
+      },
+      "harmful_tags": ["high_sugar", "lactose"],
+      "description": "World-famous hard coffee candy made with real volcanic Java coffee extract."
+    }
+  ]
+}
