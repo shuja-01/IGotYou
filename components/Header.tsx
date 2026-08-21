@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ShieldCheck, HeartPulse, UserCheck, Sun, Moon, Globe } from 'lucide-react';
+import { ShieldCheck, HeartPulse, UserCheck, Sun, Moon, Globe, Calculator, Flame } from 'lucide-react';
 import { useProfile } from '@/context/ProfileContext';
 import { useTheme } from '@/context/ThemeContext';
 import { HEALTH_CONDITIONS } from '@/lib/healthRules';
@@ -10,11 +10,13 @@ import { SUPPORTED_COUNTRIES, CountryOption } from '@/lib/productsData';
 interface HeaderProps {
   selectedCountry?: CountryOption;
   setSelectedCountry?: (country: CountryOption) => void;
+  onOpenMacroCalculator?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   selectedCountry = SUPPORTED_COUNTRIES[0],
   setSelectedCountry,
+  onOpenMacroCalculator,
 }) => {
   const { activeConditions, setIsProfileDrawerOpen } = useProfile();
   const { theme, setTheme } = useTheme();
@@ -46,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Header Controls: Country Selector + Active Profile + Theme Switcher + Edit Profile */}
+        {/* Header Controls: Country Selector + Active Profile + Macro Calc + Theme Switcher + Edit Profile */}
         <div className="flex flex-wrap items-center justify-center md:justify-end gap-2.5">
           {/* Country Selector Dropdown */}
           {setSelectedCountry && (
@@ -67,6 +69,17 @@ export const Header: React.FC<HeaderProps> = ({
                 ))}
               </select>
             </div>
+          )}
+
+          {/* Macro Calculator Trigger Button */}
+          {onOpenMacroCalculator && (
+            <button
+              onClick={onOpenMacroCalculator}
+              className="flex items-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <Flame className="w-3.5 h-3.5 text-emerald-500" />
+              <span>Daily Calorie & Macro Target</span>
+            </button>
           )}
 
           {/* Active Profile Pill */}
