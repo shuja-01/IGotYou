@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search, ShieldCheck, AlertTriangle, AlertOctagon, X, Sparkles } from 'lucide-react';
+import { Search, ShieldCheck, AlertTriangle, AlertOctagon, X, Camera, Sparkles } from 'lucide-react';
 import { EvaluationStatus } from '@/types/health';
 
 interface SearchAndFilterProps {
@@ -13,6 +13,7 @@ interface SearchAndFilterProps {
   setStatusFilter: (status: EvaluationStatus | 'all') => void;
   totalResults: number;
   placeholder?: string;
+  onOpenScanner?: () => void;
 }
 
 const CATEGORIES = ['All', 'Dishes', 'Snacks', 'Biscuits', 'Dairy', 'Soft Drinks', 'Instant Foods', 'Chocolates'];
@@ -26,31 +27,47 @@ export const SearchAndFilter: React.FC<SearchAndFilterProps> = ({
   setStatusFilter,
   totalResults,
   placeholder = 'Search by brand name or food item...',
+  onOpenScanner,
 }) => {
   return (
     <div className="space-y-4">
       {/* Search Input Bar & Status Filters */}
       <div className="flex flex-col md:flex-row items-center gap-3">
-        {/* Search Bar */}
-        <div className="relative flex-1 w-full group">
+        {/* Search Bar with Camera Scan Button */}
+        <div className="relative flex-1 w-full group flex items-center">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={placeholder}
-            className="w-full bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl pl-11 pr-10 py-3.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500/60 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
+            className="w-full bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl pl-11 pr-24 py-3.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500/60 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
           />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              type="button"
-              aria-label="Clear search"
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
+
+          <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                type="button"
+                aria-label="Clear search"
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+
+            {onOpenScanner && (
+              <button
+                type="button"
+                onClick={onOpenScanner}
+                title="Scan Food Barcode / QR with Camera"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-xs font-bold transition-all shadow-xs"
+              >
+                <Camera className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Scan</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Dynamic Safety Filters */}

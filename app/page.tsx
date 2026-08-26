@@ -8,6 +8,7 @@ import { OnboardingModal } from '@/components/OnboardingModal';
 import { ProductDetailModal } from '@/components/ProductDetailModal';
 import { AccessLockModal } from '@/components/AccessLockModal';
 import { MacroCalculatorModal, UserMacroTargets } from '@/components/MacroCalculatorModal';
+import { BarcodeScannerModal } from '@/components/BarcodeScannerModal';
 import { Product, EvaluationStatus } from '@/types/health';
 import {
   fetchAllProducts,
@@ -20,7 +21,7 @@ import {
 } from '@/lib/productsData';
 import { evaluateProductSuitability, HEALTH_CONDITIONS } from '@/lib/healthRules';
 import { useProfile } from '@/context/ProfileContext';
-import { ShieldCheck, SlidersHorizontal, Sparkles, ChevronDown, Globe, Loader2, Flame, Dumbbell, Droplets, ArrowRight } from 'lucide-react';
+import { ShieldCheck, SlidersHorizontal, Sparkles, ChevronDown, Globe, Loader2, Flame, Dumbbell, Droplets, ArrowRight, Camera } from 'lucide-react';
 
 const LOCAL_STORAGE_COUNTRY_KEY = 'igotyou_selected_country_v1';
 const LOCAL_STORAGE_MACRO_KEY = 'igotyou_user_macro_targets_v1';
@@ -32,7 +33,8 @@ export default function Home() {
   const [statusFilter, setStatusFilter] = useState<EvaluationStatus | 'all'>('all');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  // Macro Calculator Modal State
+  // Scanner & Macro Calculator Modals State
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [isMacroCalcOpen, setIsMacroCalcOpen] = useState(false);
   const [savedMacroTargets, setSavedMacroTargets] = useState<UserMacroTargets | null>(null);
 
@@ -159,11 +161,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200">
-      {/* Top Header with Country Selector & Macro Calc */}
+      {/* Top Header with Country Selector, Barcode Scanner & Macro Calc */}
       <Header
         selectedCountry={selectedCountry}
         setSelectedCountry={handleSetSelectedCountry}
         onOpenMacroCalculator={() => setIsMacroCalcOpen(true)}
+        onOpenScanner={() => setIsScannerOpen(true)}
       />
 
       {/* Main Container */}
@@ -176,10 +179,10 @@ export default function Home() {
             <div className="space-y-2 max-w-2xl">
               <div className="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400">
                 <Sparkles className="w-4 h-4" />
-                <span>Instant Health Evaluation Active</span>
+                <span className="uppercase tracking-wider font-extrabold text-[11px]">Real-Time Health Evaluation Center</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-                Food Safety Advisor & Personal Nutrition Calculator
+              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                Personalized Dietary Suitability Engine
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 Evaluating food items live against your{' '}
@@ -271,6 +274,7 @@ export default function Home() {
             }}
             totalResults={filteredProducts.length}
             placeholder={selectedCountry.searchPlaceholder}
+            onOpenScanner={() => setIsScannerOpen(true)}
           />
 
           {/* Open Food Facts Live Search Status Indicator */}
@@ -359,6 +363,11 @@ export default function Home() {
       {/* Interactive Modals */}
       <AccessLockModal />
       <OnboardingModal />
+      <BarcodeScannerModal
+        isOpen={isScannerOpen}
+        onClose={() => setIsScannerOpen(false)}
+        onProductFound={(product) => setSelectedProduct(product)}
+      />
       <MacroCalculatorModal
         isOpen={isMacroCalcOpen}
         onClose={() => setIsMacroCalcOpen(false)}
@@ -371,4 +380,3 @@ export default function Home() {
     </div>
   );
 }
-
