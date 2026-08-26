@@ -8,43 +8,29 @@ interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
+  mounted: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_THEME_KEY = 'igotyou_theme_v1';
+export const LOCAL_STORAGE_THEME_KEY = 'igotyou_theme_v1';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>('dark');
   const [mounted, setMounted] = useState(false);
 
-  const applyTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-    if (typeof window !== 'undefined') {
-      const root = document.documentElement;
-      const body = document.body;
+  const applyDOMTheme = (newTheme: Theme) => {
+    if (typeof window === 'undefined') return;
+    const root = document.documentElement;
 
-      if (newTheme === 'dark') {
-        root.classList.add('dark');
-        root.classList.remove('light');
-        if (body) {
-          body.classList.add('dark');
-          body.classList.remove('light');
-        }
-      } else {
-        root.classList.remove('dark');
-        root.classList.add('light');
-        if (body) {
-          body.classList.remove('dark');
-          body.classList.add('light');
-        }
-      }
-
-      try {
-        localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
-      } catch (e) {
-        console.error('Failed to save theme:', e);
-      }
+    if (newTheme === 'dark') {
+      root.classList.add('dark');
+      root.classList.remove('light');
+      root.style.colorScheme = 'dark';
+    } else {
+      root.classList.remove('dark');
+      root.classList.add('light');
+      root.style.colorScheme = 'light';
     }
   };
 
@@ -53,22 +39,36 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     try {
       const savedTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme | null;
       if (savedTheme === 'light' || savedTheme === 'dark') {
-        applyTheme(savedTheme);
+        setThemeState(savedTheme);
+        applyDOMTheme(savedTheme);
       } else {
-        applyTheme('dark');
+        const isDark = document.documentElement.classList.contains('dark');
+        const initial = isDark ? 'dark' : 'light';
+        setThemeState(initial);
+        applyDOMTheme(initial);
       }
     } catch (e) {
-      applyTheme('dark');
+      applyDOMTheme('dark');
     }
   }, []);
 
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+    applyDOMTheme(newTheme);
+    try {
+      localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
+    } catch (e) {
+      console.error('Failed to save theme to localStorage:', e);
+    }
+  };
+
   const toggleTheme = () => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    applyTheme(nextTheme);
+    setTheme(nextTheme);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme: applyTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme, mounted }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -81,3 +81,5 @@ export const useTheme = () => {
   }
   return context;
 };
+
+

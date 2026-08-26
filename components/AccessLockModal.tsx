@@ -61,7 +61,7 @@ export const AccessLockModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950 backdrop-blur-xl animate-fadeIn">
-      <div className="glass-panel max-w-md w-full p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl relative overflow-hidden space-y-6">
+      <div className="glass-panel relative max-w-md w-full bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden space-y-6">
         {/* Glow background accent */}
         <div className="absolute -right-12 -top-12 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
 

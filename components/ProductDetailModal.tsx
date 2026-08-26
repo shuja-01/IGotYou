@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X, AlertOctagon, AlertTriangle, CheckCircle2, Info, ShieldAlert } from 'lucide-react';
+import { X, AlertOctagon, AlertTriangle, CheckCircle2, Info, ShieldAlert, Sparkles } from 'lucide-react';
 import { Product } from '@/types/health';
 import { evaluateProductSuitability } from '@/lib/healthRules';
 import { useProfile } from '@/context/ProfileContext';
@@ -32,21 +32,23 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   const fallbackUrl = getFallbackProductImage(product.category);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 dark:bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-md animate-fadeIn">
       <div
         className="glass-panel relative w-full max-w-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header Bar */}
-        <div className="p-5 border-b border-slate-200 dark:border-slate-800/80 flex items-center justify-between bg-slate-50 dark:bg-slate-900/90 z-10">
+        <div className="p-5 border-b border-slate-200 dark:border-slate-800/80 flex items-center justify-between bg-slate-50/90 dark:bg-slate-900/90 z-10">
           <div className="flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
               {product.category}
             </span>
             <span className="text-xs text-slate-500 dark:text-slate-400">Serving Size: {product.serving_size || '100g'}</span>
           </div>
           <button
             onClick={onClose}
+            type="button"
+            aria-label="Close dialog"
             className="p-2 rounded-xl text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
@@ -71,8 +73,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                   {product.brand}
                 </span>
-                <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">{product.name}</h2>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">{product.description}</p>
+                <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5 tracking-tight">{product.name}</h2>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">{product.description}</p>
               </div>
 
               {/* Status Banner */}
@@ -93,7 +95,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <span>{evaluation.statusLabel}</span>
                   </h3>
-                  <p className="text-xs text-slate-700 dark:text-slate-300 mt-1">{evaluation.recommendation}</p>
+                  <p className="text-xs text-slate-700 dark:text-slate-300 mt-1 leading-relaxed">{evaluation.recommendation}</p>
                 </div>
               </div>
             </div>
@@ -111,23 +113,23 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 {evaluation.warnings.map((w, idx) => (
                   <div
                     key={idx}
-                    className={`p-3.5 rounded-xl border flex items-start gap-3 ${
+                    className={`p-4 rounded-xl border flex items-start gap-3.5 ${
                       w.severity === 'harmful'
-                        ? 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-500/30 text-rose-900 dark:text-rose-200'
-                        : 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-500/30 text-amber-900 dark:text-amber-200'
+                        ? 'bg-rose-50/90 dark:bg-rose-950/30 border-rose-200 dark:border-rose-500/30 text-rose-900 dark:text-rose-200'
+                        : 'bg-amber-50/90 dark:bg-amber-950/30 border-amber-200 dark:border-amber-500/30 text-amber-900 dark:text-amber-200'
                     }`}
                   >
                     <div className="mt-0.5">
                       {w.severity === 'harmful' ? (
-                        <AlertOctagon className="w-4 h-4 text-rose-600 dark:text-rose-400" />
+                        <AlertOctagon className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
                       ) : (
-                        <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                        <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                       )}
                     </div>
                     <div className="text-xs space-y-1">
                       <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <span>{w.conditionName}</span>
-                        <span className="text-[10px] px-2 py-0.2 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold">
                           {w.reason}
                         </span>
                       </div>
@@ -138,7 +140,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
             ) : (
               <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-500/30 text-xs text-emerald-800 dark:text-emerald-300 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>
                   No health conflicts found for your currently selected condition profile.
                 </span>
@@ -154,38 +156,38 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </h3>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-              <div className="bg-slate-100 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Calories</span>
-                <span className="text-base font-bold text-slate-900 dark:text-white">{n.calories} kcal</span>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] font-medium">Calories</span>
+                <span className="text-base font-bold text-slate-900 dark:text-white tabular-nums">{n.calories} kcal</span>
               </div>
-              <div className="bg-slate-100 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Sugar</span>
-                <span className="text-base font-bold text-slate-900 dark:text-white">{n.sugar_g} g</span>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] font-medium">Sugar</span>
+                <span className="text-base font-bold text-slate-900 dark:text-white tabular-nums">{n.sugar_g} g</span>
               </div>
-              <div className="bg-slate-100 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Sodium</span>
-                <span className="text-base font-bold text-slate-900 dark:text-white">{n.sodium_mg} mg</span>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] font-medium">Sodium</span>
+                <span className="text-base font-bold text-slate-900 dark:text-white tabular-nums">{n.sodium_mg} mg</span>
               </div>
-              <div className="bg-slate-100 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Saturated Fat</span>
-                <span className="text-base font-bold text-slate-900 dark:text-white">{n.saturated_fat_g} g</span>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] font-medium">Saturated Fat</span>
+                <span className="text-base font-bold text-slate-900 dark:text-white tabular-nums">{n.saturated_fat_g} g</span>
               </div>
-              <div className="bg-slate-100 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Trans Fat</span>
-                <span className="text-base font-bold text-slate-900 dark:text-white">{n.trans_fat_g} g</span>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] font-medium">Trans Fat</span>
+                <span className="text-base font-bold text-slate-900 dark:text-white tabular-nums">{n.trans_fat_g} g</span>
               </div>
-              <div className="bg-slate-100 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Cholesterol</span>
-                <span className="text-base font-bold text-slate-900 dark:text-white">{n.cholesterol_mg} mg</span>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] font-medium">Cholesterol</span>
+                <span className="text-base font-bold text-slate-900 dark:text-white tabular-nums">{n.cholesterol_mg} mg</span>
               </div>
-              <div className="bg-slate-100 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Contains Lactose</span>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] font-medium">Contains Lactose</span>
                 <span className={`text-sm font-bold ${n.contains_lactose ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
                   {n.contains_lactose ? 'Yes' : 'No'}
                 </span>
               </div>
-              <div className="bg-slate-100 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Contains Gluten</span>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] font-medium">Contains Gluten</span>
                 <span className={`text-sm font-bold ${n.contains_gluten ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
                   {n.contains_gluten ? 'Yes' : 'No'}
                 </span>
@@ -195,15 +197,17 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/90 flex justify-end">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 flex justify-end">
           <button
             onClick={onClose}
-            className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-6 py-2 rounded-xl text-xs font-semibold transition-colors"
+            type="button"
+            className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white px-6 py-2.5 rounded-xl text-xs font-bold transition-colors"
           >
-            Close
+            Close Evaluation
           </button>
         </div>
       </div>
     </div>
   );
 };
+
