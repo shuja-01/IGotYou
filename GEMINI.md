@@ -149,3 +149,29 @@ $$\text{TDEE} = \text{BMR} \times \text{Activity Multiplier}$$
 * **Water Intake Target** (Liters) — $35\text{ml}$ per kg bodyweight
 * **Max Daily Sodium Limit** (mg) — 2,000mg max
 * **Max Daily Added Sugar Limit** (g) — 25g (women) / 36g (men)
+
+---
+
+## 8. Model Context Protocol (MCP) Server Integration
+
+The project includes an **Open Food Facts & Nutrition Evaluation MCP Server** (`mcp-server/`) exposing standard MCP tools over `stdio` transport (JSON-RPC 2.0). This allows AI assistants and IDE integrations to query food nutrition, scan barcodes, and evaluate health suitability.
+
+### Available MCP Tools:
+1. **`search_food_products`**:
+   - Query global packaged items and cooked dishes across India (`in`), Malaysia (`my`), Singapore (`sg`), Indonesia (`id`), or Global (`world`).
+   - Returns structured nutritional facts per 100g (Calories, Sugars, Sodium, Saturated Fats, Allergens).
+2. **`get_product_by_barcode`**:
+   - Exact barcode lookup (EAN-13 / UPC) from Open Food Facts.
+   - Returns ingredient analysis, Nutri-Score (A–E), NOVA food processing classification (1–4), and allergen tags.
+3. **`evaluate_food_suitability`**:
+   - Runs rule-based suitability checks on any product or barcode against active medical conditions (`diabetes_type_2`, `hypertension`, `high_cholesterol`, `uric_acid_gout`, `lactose_intolerance`, `gluten_sensitivity`).
+   - Returns status (`safe`, `caution`, `harmful`), clinical conflict warnings, and portion guidelines.
+4. **`calculate_daily_macros`**:
+   - Computes Mifflin-St Jeor daily calories, protein, fat, carbs, hydration, and sodium/sugar maximums.
+
+### Running the MCP Server:
+```bash
+# Start standalone MCP Server
+npm run mcp:start
+```
+Configuration is stored in `.agents/mcp_config.json`.

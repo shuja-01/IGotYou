@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "open-food-facts-mcp": {
+      "command": "node",
+      "args": ["./mcp-server/index.mjs"],
+      "description": "Open Food Facts global food & nutrition database with clinical suitability evaluation and Mifflin-St Jeor macro target advisor."
+    }
+  }
+}
