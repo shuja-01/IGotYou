@@ -1,3 +1,11 @@
+/**
+ * Health Evaluation Engine — "I Got You!" Food Suitability & Health Advisor
+ * 
+ * Provides clinical rule-based evaluations comparing packaged food items & cooked dishes
+ * against active user health conditions (Diabetes, Hypertension, High Cholesterol, Gout,
+ * Lactose Intolerance, Gluten Sensitivity).
+ */
+
 import {
   ConditionId,
   HealthCondition,
@@ -7,6 +15,9 @@ import {
   EvaluationStatus,
 } from '@/types/health';
 
+/**
+ * Standard selectable health conditions and diagnostic definitions
+ */
 export const HEALTH_CONDITIONS: HealthCondition[] = [
   {
     id: 'diabetes_type_2',
@@ -66,6 +77,18 @@ export const HEALTH_CONDITIONS: HealthCondition[] = [
   },
 ];
 
+/**
+ * Evaluates food product suitability against a list of active user medical/dietary conditions.
+ *
+ * Evaluation Logic:
+ * - 🟢 Safe: No conflicting nutrient thresholds or allergens found.
+ * - 🟡 Caution: Moderate nutrient level (borderline sugar/sodium/sat fat); recommends portion limit.
+ * - 🔴 Harmful: Directly exceeds safe thresholds or contains critical allergens (lactose/gluten/purines).
+ *
+ * @param product Product data containing 100g nutritional facts and harmful tags
+ * @param activeConditions Array of condition IDs currently active in user profile
+ * @returns EvaluationResult with status classification, warnings, and portion advice
+ */
 export function evaluateProductSuitability(
   product: Product,
   activeConditions: ConditionId[]
@@ -73,6 +96,7 @@ export function evaluateProductSuitability(
   const warnings: ConditionWarning[] = [];
   const safeNotes: string[] = [];
 
+  // Fallback for general/unselected profile
   if (!activeConditions || activeConditions.length === 0) {
     return {
       status: 'safe',
@@ -88,7 +112,7 @@ export function evaluateProductSuitability(
 
   const { nutrition_per_100g: n, harmful_tags: tags } = product;
 
-  // Rule 1: Diabetes
+  // Rule 1: Diabetes / High Blood Sugar (>10g sugar = harmful, >5g = caution)
   if (activeConditions.includes('diabetes_type_2')) {
     if (n.sugar_g > 10 || tags.includes('high_sugar')) {
       warnings.push({
@@ -111,7 +135,7 @@ export function evaluateProductSuitability(
     }
   }
 
-  // Rule 2: Hypertension (High BP)
+  // Rule 2: Hypertension / High Blood Pressure (>400mg sodium = harmful, >200mg = caution)
   if (activeConditions.includes('hypertension')) {
     if (n.sodium_mg > 400 || tags.includes('high_sodium')) {
       warnings.push({
@@ -134,7 +158,7 @@ export function evaluateProductSuitability(
     }
   }
 
-  // Rule 3: Hypotension (Low BP)
+  // Rule 3: Hypotension / Low Blood Pressure (Flag excessive caffeine / dehydration risks)
   if (activeConditions.includes('hypotension')) {
     if (n.caffeine_mg && n.caffeine_mg > 60) {
       warnings.push({
@@ -149,7 +173,7 @@ export function evaluateProductSuitability(
     }
   }
 
-  // Rule 4: High Cholesterol
+  // Rule 4: High Cholesterol (>5g saturated fat or >0.5g trans fat = harmful)
   if (activeConditions.includes('high_cholesterol')) {
     if (n.saturated_fat_g > 5 || n.trans_fat_g > 0.5 || tags.includes('high_saturated_fat')) {
       warnings.push({
@@ -172,7 +196,7 @@ export function evaluateProductSuitability(
     }
   }
 
-  // Rule 5: Uric Acid / Gout
+  // Rule 5: Uric Acid / Gout (Purine Level check)
   if (activeConditions.includes('uric_acid_gout')) {
     if (n.purine_level === 'high') {
       warnings.push({
@@ -195,7 +219,7 @@ export function evaluateProductSuitability(
     }
   }
 
-  // Rule 6: Lactose Intolerance
+  // Rule 6: Lactose Intolerance (Direct dairy/lactose allergen check)
   if (activeConditions.includes('lactose_intolerance')) {
     if (n.contains_lactose || tags.includes('lactose')) {
       warnings.push({
@@ -210,7 +234,7 @@ export function evaluateProductSuitability(
     }
   }
 
-  // Rule 7: Gluten Sensitivity
+  // Rule 7: Gluten Sensitivity / Celiac (Direct wheat/gluten grain check)
   if (activeConditions.includes('gluten_sensitivity')) {
     if (n.contains_gluten || tags.includes('gluten')) {
       warnings.push({
@@ -225,7 +249,7 @@ export function evaluateProductSuitability(
     }
   }
 
-  // Calculate Status
+  // Compute Overall Suitability Classification
   const hasHarmful = warnings.some((w) => w.severity === 'harmful');
   const hasCaution = warnings.some((w) => w.severity === 'caution');
 
@@ -265,3 +289,4 @@ export function evaluateProductSuitability(
     safeNotes,
   };
 }
+

@@ -1,3 +1,11 @@
+/**
+ * Theme Context & Provider — "I Got You!" Health Advisor
+ * 
+ * Manages light and dark theme switching synchronized across localStorage,
+ * document.documentElement class mutations (Tailwind class-based dark mode),
+ * and the CSS color-scheme property for native form controls and scrollbars.
+ */
+
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -19,6 +27,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setThemeState] = useState<Theme>('dark');
   const [mounted, setMounted] = useState(false);
 
+  /**
+   * Applies the theme class and native color-scheme directly onto <html>
+   */
   const applyDOMTheme = (newTheme: Theme) => {
     if (typeof window === 'undefined') return;
     const root = document.documentElement;
@@ -34,6 +45,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
+  // Sync state with localStorage or pre-hydration DOM classes on client mount
   useEffect(() => {
     setMounted(true);
     try {
@@ -52,6 +64,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, []);
 
+  /**
+   * Explicitly sets the theme, updates DOM, and persists to localStorage
+   */
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
     applyDOMTheme(newTheme);
@@ -62,6 +77,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
+  /**
+   * Toggles between 'light' and 'dark'
+   */
   const toggleTheme = () => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(nextTheme);
@@ -81,5 +99,6 @@ export const useTheme = () => {
   }
   return context;
 };
+
 
 

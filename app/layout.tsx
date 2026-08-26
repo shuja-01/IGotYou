@@ -1,3 +1,11 @@
+/**
+ * Root Layout — "I Got You!" Food Suitability & Health Advisor
+ * 
+ * Provides global SEO metadata, Google Fonts (Outfit & Plus Jakarta Sans),
+ * pre-hydration inline script for instant zero-flicker theme initialization,
+ * and wrapping context providers (ThemeProvider & ProfileProvider).
+ */
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { ProfileProvider } from '@/context/ProfileContext';
@@ -17,12 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Google Fonts Preconnect & Styles */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        {/* Pre-hydration script to avoid light/dark flash before React hydration */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -53,4 +63,5 @@ export default function RootLayout({
     </html>
   );
 }
+
 

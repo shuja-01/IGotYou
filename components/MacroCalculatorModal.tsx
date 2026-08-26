@@ -1,3 +1,11 @@
+/**
+ * Daily Calorie & Macro Calculator Modal — "I Got You!" Health Advisor
+ * 
+ * Implements the scientific Mifflin-St Jeor equation to calculate Basal Metabolic
+ * Rate (BMR) and Total Daily Energy Expenditure (TDEE), adjusting for user fitness
+ * goals, macro splits (protein, fats, carbs), hydration (35ml/kg), and daily sodium/sugar limits.
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -58,6 +66,7 @@ export const MacroCalculatorModal: React.FC<MacroCalculatorModalProps> = ({
   const [computedTargets, setComputedTargets] = useState<UserMacroTargets | null>(null);
 
   // Load saved preferences on mount
+
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
