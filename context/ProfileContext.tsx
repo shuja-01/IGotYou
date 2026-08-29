@@ -17,7 +17,7 @@ interface ProfileContextType {
 const DEFAULT_PROFILE: UserProfile = {
   id: 'guest-user-1',
   email: 'guest@igotyou.health',
-  full_name: 'Health Explorer',
+  full_name: 'Health Guardian',
   conditions: ['diabetes_type_2', 'hypertension'],
 };
 

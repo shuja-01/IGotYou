@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import { AlertTriangle, CheckCircle2, XCircle, Info, ChevronRight, Milk, Wheat } from 'lucide-react';
+import React from 'react';
+import Image from 'next/image';
+import { AlertCircle, AlertTriangle, CheckCircle2, ShieldAlert } from 'lucide-react';
 import { Product } from '@/types/health';
 import { evaluateProductSuitability } from '@/lib/healthRules';
 import { useProfile } from '@/context/ProfileContext';
@@ -19,140 +20,160 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const { activeConditions } = useProfile();
   const evaluation = evaluateProductSuitability(product, activeConditions);
 
-  const fallbackUrl = getFallbackProductImage(product.category);
-  const [imgSrc, setImgSrc] = useState(product.image_url || fallbackUrl);
+  const fallbackImage = getFallbackProductImage(product.category);
+  const imageUrl = product.image_url || fallbackImage;
 
-  const getStatusIcon = () => {
-    switch (evaluation.status) {
-      case 'safe':
-        return <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />;
-      case 'caution':
-        return <AlertTriangle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />;
-      case 'harmful':
-        return <XCircle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 shrink-0" />;
-    }
-  };
+  // Identify high-risk nutrients for red highlighting in the 3-column nutrition strip
+  const n = product.nutrition_per_100g || {};
+  const sugar = n.sugar_g ?? 0;
+  const sodium = n.sodium_mg ?? 0;
+  const satFat = n.saturated_fat_g ?? 0;
 
-  const getStatusBadgeStyles = () => {
-    switch (evaluation.status) {
-      case 'safe':
-        return 'bg-emerald-50/95 text-emerald-800 border-emerald-300 dark:bg-emerald-950/80 dark:text-emerald-300 dark:border-emerald-500/40 shadow-sm';
-      case 'caution':
-        return 'bg-amber-50/95 text-amber-800 border-amber-300 dark:bg-amber-950/80 dark:text-amber-300 dark:border-amber-500/40 shadow-sm';
-      case 'harmful':
-        return 'bg-rose-50/95 text-rose-800 border-rose-300 dark:bg-rose-950/80 dark:text-rose-300 dark:border-rose-500/40 shadow-sm';
-    }
-  };
+  const isSugarHarmful =
+    activeConditions.includes('diabetes_type_2') && (sugar > 10 || product.harmful_tags?.includes('high_sugar'));
+  const isSodiumHarmful =
+    activeConditions.includes('hypertension') && (sodium > 400 || product.harmful_tags?.includes('high_sodium'));
+  const isSatFatHarmful =
+    activeConditions.includes('high_cholesterol') && (satFat > 5 || product.harmful_tags?.includes('high_saturated_fat'));
+
+  // Get primary warning reason text
+  const primaryWarning = evaluation.warnings?.[0];
 
   return (
     <div
       onClick={() => onSelectProduct(product)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onSelectProduct(product);
-        }
-      }}
-      className="glass-card rounded-2xl overflow-hidden flex flex-col justify-between cursor-pointer group hover:scale-[1.015] transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+      className="group cursor-pointer bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xs hover:shadow-xl hover:border-slate-300 dark:hover:border-slate-700 transition-all flex flex-col justify-between"
     >
-      {/* Product Image & Badge Header */}
-      <div className="relative w-full h-44 bg-slate-100 dark:bg-slate-900 overflow-hidden">
-        <img
-          src={imgSrc}
+      {/* Top Media Container */}
+      <div className="relative w-full h-48 bg-slate-100 dark:bg-slate-800 overflow-hidden">
+        <Image
+          src={imageUrl}
           alt={product.name}
-          onError={() => setImgSrc(fallbackUrl)}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95 group-hover:opacity-100"
+          fill
+          unoptimized
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/15 to-transparent dark:from-slate-950/90 dark:via-slate-950/30 pointer-events-none" />
 
-        {/* Dynamic Status Badge */}
-        <div className="absolute top-3 left-3 z-10">
-          <div
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold backdrop-blur-md border ${getStatusBadgeStyles()}`}
-          >
-            {getStatusIcon()}
-            <span>{evaluation.statusLabel}</span>
-          </div>
+        {/* Top-Right Safety Status Pill */}
+        <div className="absolute top-3 right-3 z-10">
+          {evaluation.status === 'harmful' && (
+            <span className="bg-rose-500 text-white font-extrabold text-[10px] tracking-wider uppercase px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+              <ShieldAlert className="w-3 h-3 stroke-[2.5]" />
+              <span>HARMFUL / AVOID</span>
+            </span>
+          )}
+          {evaluation.status === 'caution' && (
+            <span className="bg-amber-500 text-slate-950 font-extrabold text-[10px] tracking-wider uppercase px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+              <AlertTriangle className="w-3 h-3 stroke-[2.5]" />
+              <span>CAUTION</span>
+            </span>
+          )}
+          {evaluation.status === 'safe' && (
+            <span className="bg-emerald-500 text-white font-extrabold text-[10px] tracking-wider uppercase px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+              <CheckCircle2 className="w-3 h-3 stroke-[2.5]" />
+              <span>SAFE / GOOD TO GO</span>
+            </span>
+          )}
         </div>
 
-        {/* Category & Allergen Pills */}
-        <div className="absolute top-3 right-3 z-10 flex items-center gap-1">
-          {product.nutrition_per_100g.contains_lactose && (
-            <span
-              title="Contains Lactose"
-              className="bg-blue-600/90 text-white p-1 rounded-md text-[10px] backdrop-blur-md shadow-sm"
-            >
-              <Milk className="w-3 h-3" />
-            </span>
-          )}
-          {product.nutrition_per_100g.contains_gluten && (
-            <span
-              title="Contains Gluten"
-              className="bg-amber-600/90 text-white p-1 rounded-md text-[10px] backdrop-blur-md shadow-sm"
-            >
-              <Wheat className="w-3 h-3" />
-            </span>
-          )}
-          <span className="bg-slate-900/85 dark:bg-slate-950/80 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-0.5 rounded-md border border-slate-700/60 dark:border-slate-800">
+        {/* Bottom-Left Category Pill */}
+        <div className="absolute bottom-3 left-3 z-10">
+          <span className="bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-white font-bold text-[10px] px-3 py-0.5 rounded-full shadow-sm">
             {product.category}
           </span>
         </div>
       </div>
 
-      {/* Card Content */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-        <div>
-          <span className="text-[11px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">
+      {/* Card Content Body */}
+      <div className="p-5 space-y-3.5 flex-1 flex flex-col justify-between">
+        <div className="space-y-1.5">
+          {/* Brand Name */}
+          <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500">
             {product.brand}
           </span>
-          <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors mt-0.5">
+
+          {/* Product Title */}
+          <h3 className="text-base font-extrabold text-slate-900 dark:text-white line-clamp-1 leading-snug">
             {product.name}
           </h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-            {product.description}
+
+          {/* Description */}
+          <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
+            {product.description || `Evaluated commercial packaged food item (${product.serving_size || '100g'}).`}
           </p>
         </div>
 
-        {/* Nutritional Highlights */}
-        <div className="grid grid-cols-3 gap-2 py-2.5 border-y border-slate-200 dark:border-slate-800/80 text-center text-xs">
-          <div className="bg-slate-50 dark:bg-slate-900/70 p-2 rounded-xl border border-slate-200/80 dark:border-slate-800">
-            <span className="block text-[10px] font-medium text-slate-500 dark:text-slate-400">Sugar</span>
-            <span className="font-bold text-slate-900 dark:text-slate-100 tabular-nums">{product.nutrition_per_100g.sugar_g}g</span>
+        <div className="space-y-3 pt-1">
+          {/* 3-Column Nutrition Fact Strip */}
+          <div className="grid grid-cols-3 gap-2 py-2 border-y border-slate-100 dark:border-slate-800 text-center">
+            <div>
+              <span className="block text-[10px] text-slate-400 dark:text-slate-500 font-medium">Sugar</span>
+              <span
+                className={`text-xs font-bold tabular-nums ${
+                  isSugarHarmful ? 'text-rose-600 dark:text-rose-400 font-black' : 'text-slate-800 dark:text-slate-200'
+                }`}
+              >
+                {sugar}g
+              </span>
+            </div>
+            <div className="border-x border-slate-100 dark:border-slate-800">
+              <span className="block text-[10px] text-slate-400 dark:text-slate-500 font-medium">Sodium</span>
+              <span
+                className={`text-xs font-bold tabular-nums ${
+                  isSodiumHarmful ? 'text-rose-600 dark:text-rose-400 font-black' : 'text-slate-800 dark:text-slate-200'
+                }`}
+              >
+                {sodium}mg
+              </span>
+            </div>
+            <div>
+              <span className="block text-[10px] text-slate-400 dark:text-slate-500 font-medium">Sat Fat</span>
+              <span
+                className={`text-xs font-bold tabular-nums ${
+                  isSatFatHarmful ? 'text-rose-600 dark:text-rose-400 font-black' : 'text-slate-800 dark:text-slate-200'
+                }`}
+              >
+                {satFat}g
+              </span>
+            </div>
           </div>
-          <div className="bg-slate-50 dark:bg-slate-900/70 p-2 rounded-xl border border-slate-200/80 dark:border-slate-800">
-            <span className="block text-[10px] font-medium text-slate-500 dark:text-slate-400">Sodium</span>
-            <span className="font-bold text-slate-900 dark:text-slate-100 tabular-nums">{product.nutrition_per_100g.sodium_mg}mg</span>
-          </div>
-          <div className="bg-slate-50 dark:bg-slate-900/70 p-2 rounded-xl border border-slate-200/80 dark:border-slate-800">
-            <span className="block text-[10px] font-medium text-slate-500 dark:text-slate-400">Sat Fat</span>
-            <span className="font-bold text-slate-900 dark:text-slate-100 tabular-nums">{product.nutrition_per_100g.saturated_fat_g}g</span>
-          </div>
-        </div>
 
-        {/* Evaluation Warning Summary snippet */}
-        {evaluation.warnings.length > 0 ? (
-          <div className="text-xs space-y-1">
-            <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-400 flex items-center gap-1.5">
-              <Info className="w-3.5 h-3.5 shrink-0" />
-              <span className="line-clamp-1">{evaluation.warnings[0].reason}</span>
-            </p>
-          </div>
-        ) : (
-          <div className="text-xs text-emerald-700 dark:text-emerald-400 font-medium flex items-center gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-            <span>Fits active profile conditions</span>
-          </div>
-        )}
+          {/* Condition Warning Alert Box */}
+          {evaluation.status === 'harmful' && primaryWarning && (
+            <div className="p-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200/80 dark:border-rose-900/60 flex items-center gap-2 text-[11px] text-rose-700 dark:text-rose-300 font-medium animate-fadeIn">
+              <AlertCircle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
+              <span className="line-clamp-1">{primaryWarning.reason}</span>
+            </div>
+          )}
 
-        {/* Action Button */}
-        <div className="pt-1 flex items-center justify-between text-xs text-emerald-600 dark:text-emerald-400 font-bold group-hover:text-emerald-500 dark:group-hover:text-emerald-300">
-          <span>View Health Evaluation</span>
-          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          {evaluation.status === 'caution' && primaryWarning && (
+            <div className="p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-900/60 flex items-center gap-2 text-[11px] text-amber-800 dark:text-amber-300 font-medium animate-fadeIn">
+              <AlertTriangle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+              <span className="line-clamp-1">{primaryWarning.reason}</span>
+            </div>
+          )}
+
+          {evaluation.status === 'safe' && (
+            <div className="p-2.5 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-900/40 flex items-center gap-2 text-[11px] text-emerald-800 dark:text-emerald-300 font-medium animate-fadeIn">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+              <span className="line-clamp-1">Safe for active profile conditions</span>
+            </div>
+          )}
+
+          {/* Action Trigger Button */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectProduct(product);
+            }}
+            className="w-full py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/80 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-bold transition-colors text-center"
+          >
+            View Health Evaluation
+          </button>
         </div>
       </div>
     </div>
   );
 };
-
